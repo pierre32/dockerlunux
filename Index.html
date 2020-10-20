@@ -1,0 +1,138 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>A tutorial about how to connect Docker with Pycharm</title> 
+	<link rel="stylesheet" type="text/css" href="style/style.css">
+</head>
+<body>
+<h1>A tutorial about how to connect Docker with Pycharm</h1>
+		<ul class="nav">
+			<li class="nav-item">
+				<a class="nav-link" href="https://eshlox.net/2017/04/29/how-to-use-docker-with-pycharm">Link</a>
+			</li>
+			<li class="nav-item">
+				<a class="nav-link" href="https://www.bing.com/videos/search?q=A+tutorial+about+how+to+connect+Docker+with+Pycharm+to+write+python+code.&qpvt=A+tutorial+about+how+to+connect+Docker+with+Pycharm+to+write+python+code.&view=detail&mid=F79AB85ECB683868D96EF79AB85ECB683868D96E&&FORM=VRDGAR&ru=%2Fvideos%2Fsearch%3Fq%3DA%2Btutorial%2Babout%2Bhow%2Bto%2Bconnect%2BDocker%2Bwith%2BPycharm%2Bto%2Bwrite%2Bpython%2Bcode.%26qpvt%3DA%2Btutorial%2Babout%2Bhow%2Bto%2Bconnect%2BDocker%2Bwith%2BPycharm%2Bto%2Bwrite%2Bpython%2Bcode.%26FORM%3DVDRE">Link</a>
+			</li>
+			<li class="nav-item">
+				<a class="nav-link" href="https://blog.jetbrains.com/pycharm/2015/12/using-docker-in-pycharm/">Link</a>
+			</li>
+			
+		</ul>
+	
+<h2>What you need is:</h2>	
+<ul class="list-group">
+	<li class="list-group-item"> Docker - https://docs.docker.com/engine/installation/</li>
+	<li class="list-group-item"> docker-compose - https://docs.docker.com/compose/install/
+PyCharm ;-)</li>
+	
+</ul>
+<p>
+I use PyCharm in 2017.12 version but even with previous ones this tutorial
+should work correctly.
+
+First you need to configure Docker. Go to File -> Settings and find Docker
+section (you can use search bar).</p>
+<h4>Get Docker</h4>
+Docker is an open platform for developing, shipping, and running applications. Docker enables you to separate your applications from your infrastructure so you can deliver software quickly. With Docker, you can manage your infrastructure in the same ways you manage your applications. By taking advantage of Docker’s methodologies for shipping, testing, and deploying code quickly, you can significantly reduce the delay between writing code and running it in production.
+
+You can download and install Docker on multiple platforms. Refer to the following section and choose the best installation path for you.
+<div class="media">
+	<img class="d-flex mr-3" src="apple_48.svg" alt="Generic placeholder image">
+	<div class="media-body">
+		<h5 class="mt-0">Docker Desktop for Mac</h5>
+		A native application using the macOS sandbox security model which delivers all Docker tools to your Mac.
+	</div>
+	<div class="media">
+		<img class="d-flex mr-3" src="windows_48.svg" alt="Generic placeholder image">
+		<div class="media-body">
+			<h5 class="mt-0">Docker Desktop for Windows</h5>
+			A native Windows application which delivers all Docker tools to your Windows computer.
+		</div>
+		<div class="media">
+			<img class="d-flex mr-3" src="linux_48.svg" alt="Generic placeholder image">
+			<div class="media-body">
+				<h5 class="mt-0">Docker for Linux</h5>
+				Install Docker on a computer which already has a Linux distribution installed.
+			</div>
+		</div>
+	</div>
+</div>
+<div class="media">
+	<img class="d-flex mr-3" src="pycharm-docker-configuration.png" alt="Generic placeholder image">
+	<div class="media-body">
+
+
+Just add a new Docker, fill the API URL and Docker Compose executable inputs.
+When everything is added correctly you should see a "Connection successful" message.
+
+<div class="row">
+<div class="m|pt|b|1|r|x|y-0-10">
+	  Now you need to configure Docker all your projects. Once again go to the
+
+
+settings, find project configuration and choose "Project Interpreter" section.
+
+<h3>Setting up PyCharm</h3>
+
+<h5>Download PyCharm</h5>
+Community
+For pure Python development
+
+<a class="btn btn-light btn-lg|sm" href="https://www.jetbrains.com/pycharm/download/download-thanks.html?platform=windows&code=PCC" role="button">Link</a>
+<<div class="media">
+	<img class="d-flex mr-3" src="images.jpg" alt="Generic placeholder image">
+	<div class="media-body">
+		<h5 class="mt-0">Media heading</h5>
+		
+	</div>
+</div>
+
+Using a remote Python interpreter from Docker is available only on PyCharm Professional. So, let’s see how to setup it up.
+Once you’ve built your Docker image and opened your project folder in PyCharm navigate to File > Settings > Project > Python Interpreter.
+You should see something like this:
+
+<div class="media">
+	<img class="d-flex mr-3" src="pycharm pic.png" alt="Generic placeholder image">
+	<div class="media-body">
+		</div>
+
+		Now click on the little gear near the top-right and add a new Python interpreter.
+Here you will need to select Docker and choose the image name you selected before in the drop-down menu called Image name like so:
+
+<div class="media">
+	<img class="d-flex mr-3" src="pycharm2.png" alt="Generic placeholder image">
+	<div class="media-body">
+		<h5 class="mt-0">Media heading</h5>
+		After this configuration is confirmed, wait for the indexing to finish, and try running run.py.
+
+		<<blockquote class="blockquote">
+			<p class="mb-0">CUDA isn't available :(</p>
+		</blockquote>
+		At this point we didn’t configure the Run/Debug configuration to have Docker use the GPU but that can be quickly fixed.
+Open the auto-generated Run/Debug configuration and add --gpus all at the end of the Docker container settings.
+You should end up with something like this:
+	</div>
+	<<div class="media">
+		<img class="d-flex mr-3" src="pycharm3.png" alt="Generic placeholder image">
+		<div class="media-body">
+			Confirm this configuration and run it, CUDA should result available now!
+Setting up Visual Studio Code
+I will rely on the new Remote Development extensions for Visual Studio Code to setup development through Docker.
+The first step will be installing the Remote Development extension pack and opening the project folder.
+Use the Add Development Container Configuration Files command from the Visual Studio command palette.
+Choose to use your own Dockerfile.
+At this point a devcontainer.json file will be created into a .devcontainer directory and it will look like this:
+</div>
+
+
+</div>
+</div>
+
+</div>
+	
+</div>
+		
+	</div>
+</div>
+</body>
+</html>
